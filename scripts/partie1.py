@@ -7,7 +7,7 @@ import numpy as np
 latitude = float(sys.argv[1])
 longitude = float(sys.argv[2])
 
-data = pd.read_csv(sys.argv[3], sep=';')
+data = pd.read_csv(sys.argv[3], sep=',')
 
 
 tab = []
