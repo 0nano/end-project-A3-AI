@@ -1,12 +1,21 @@
-import sys
-import pandas as pd
-from sklearn.cluster import KMeans
 import json
-import numpy as np
+import joblib
+from sys import argv
+import sklearn
+import argparse
 
+best_model_svm = joblib.load('best_model_svm.pkl')
+best_model_rf = joblib.load('best_model_rf.pkl')
+best_model_mlp = joblib.load('best_model_mlp.pkl')
 
 # Fonction de prédiction de gravité d'accident
-def predict_accident_gravity(accident_info, classification_method, best_model_svm, best_model_rf, best_model_mlp):
+accident_info = [float(arg) for arg in argv[1].split(",")]
+classification_method = argv[2]
+print(argv[1])
+print(argv[2])
+
+def predict_accident_gravity(accident_info, classification_method):
+    print("hello")
     # Utiliser la méthode de classification spécifiée
     if classification_method == "SVM":
         prediction = best_model_svm.predict(accident_info)
@@ -20,7 +29,9 @@ def predict_accident_gravity(accident_info, classification_method, best_model_sv
     
     # Créer un dictionnaire contenant la prédiction de gravité
     result = {"gravitée": prediction}
-    
-  # Conversion du dictionnaire en JSON
-json_output = json.dumps(result)
-print(json_output)
+    # Conversion du dictionnaire en JSON
+    json_output = json.dumps(result)
+    print(json_output)
+
+
+predict_accident_gravity(argv[1],argv[2])
